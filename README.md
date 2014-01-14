@@ -20,6 +20,8 @@ Nugget also includes a very basic web service daemon that simply reads the curre
 
 Additionally, nugget includes support for sending results of the tests to [backstop](https://github.com/obfuscurity/backstop).
 
+![](https://dl.dropboxusercontent.com/s/1xhl7fnuw0y0934/2014-01-13%20at%207.47%20PM.png)
+
 #### License
 
 nugget is open source software available under the MIT License
