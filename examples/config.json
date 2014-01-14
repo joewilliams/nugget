@@ -35,7 +35,7 @@
       "url": "https://github.com/tmm1/rbtrace/!svn/bc/1",
 
       "headers": {
-        "user-agent": "SVN/1.7.10 neon/0.29.6 turd/0.1"
+        "user-agent": "SVN/1.7.10 neon/0.29.6 nugget/0.0.1"
       },
 
       "body": "<?xml version='1.0' encoding='utf-8'?><propfind xmlns=\"DAV:\"><allprop/></propfind>",
@@ -45,6 +45,30 @@
     "response": {
       "response_code": 207,
       "response_body": "aman"
+    }
+  },
+
+  "github_git_upload_pack": {
+    "type": "http",
+
+    "request": {
+      "url": "https://github.com/tmm1/rbtrace/info/refs?service=git-upload-pack",
+      "headers": {
+        "user-agent": "git/1.8.2 nugget/0.0.1"
+      },
+      "method": "get"
+    },
+
+    "response": {
+      "response_code": 200,
+
+      "response_headers": [
+        "Content-Type: application/x-git-upload-pack-advertisement"
+      ],
+
+      "response_body": [
+        "003f62998e62735538453fc434e5243ee09635c828bb refs/pull/12/head"
+      ]
     }
   }
 
