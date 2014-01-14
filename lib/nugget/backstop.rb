@@ -8,13 +8,10 @@ module Nugget
 
     def self.send_test_result(name, result)
 
-      pass_fail = 0
-
       if result == "FAIL"
-        pass_fail = 1
+        backstop_requst("#{name}.result", 1)
       end
 
-      backstop_requst("#{name}.result", pass_fail)
     end
 
     def self.send_test_timings(name, response)
