@@ -28,7 +28,7 @@
     }
   },
 
-  "github_slumlord": {
+  "github_svn": {
     "type": "http",
 
     "request": {
