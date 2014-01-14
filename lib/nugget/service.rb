@@ -69,8 +69,13 @@ module Nugget
         options.store(:method, sym_method)
       end
 
+      if options[:url]
+        url = options[:url]
+        options.delete(:url)
+      end
+
       {
-        :url => definition[:url],
+        :url => url,
         :type => definition[:type],
         :options => options
       }

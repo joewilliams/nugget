@@ -2,9 +2,9 @@
 
   "github_http_test": {
     "type": "http",
-    "url": "https://github.com/",
 
     "request": {
+      "url": "https://github.com/",
       "method": "get"
     },
 
@@ -25,6 +25,26 @@
     "response": {
       "response": ["SSH-2.0"],
       "total_time": 1
+    }
+  },
+
+  "github_slumlord": {
+    "type": "http",
+
+    "request": {
+      "url": "https://github.com/tmm1/rbtrace/!svn/bc/1",
+
+      "headers": {
+        "user-agent": "SVN/1.7.10 neon/0.29.6 turd/0.1"
+      },
+
+      "body": "<?xml version='1.0' encoding='utf-8'?><propfind xmlns=\"DAV:\"><allprop/></propfind>",
+      "method": "propfind"
+    },
+
+    "response": {
+      "response_code": 207,
+      "response_body": "aman"
     }
   }
 
