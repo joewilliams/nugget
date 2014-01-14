@@ -1,0 +1,31 @@
+{
+
+  "github_http_test": {
+    "type": "http",
+    "url": "https://github.com/",
+
+    "request": {
+      "method": "get"
+    },
+
+    "response": {
+      "response_code": 200,
+      "total_time": 5
+    }
+  },
+
+  "github_tcp_test": {
+    "type": "tcp",
+
+    "request": {
+      "host": "github.com",
+      "port": "22"
+    },
+
+    "response": {
+      "response": ["SSH-2.0"],
+      "total_time": 1
+    }
+  }
+
+}
