@@ -19,6 +19,7 @@ require 'nugget/cli'
 require 'nugget/service'
 require 'nugget/web'
 require 'nugget/backstop'
+require 'nugget/version'
 
 module  Nugget
   class << self
