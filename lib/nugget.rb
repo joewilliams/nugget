@@ -1,6 +1,6 @@
 require 'rubygems'
 
-require '/Users/joe/src/turd/lib/turd'
+require 'turd'
 require 'mixlib/cli'
 require 'mixlib/config'
 require 'mixlib/log'
