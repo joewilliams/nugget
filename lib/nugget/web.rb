@@ -13,7 +13,7 @@ module Nugget
         body = [File.read(Nugget::Config.resultsfile)]
         [200, { 'Content-Type' => 'text/plain' }, body]
       else
-        [500, { 'Content-Type' => 'text/plain' }, ["nugget results file over an hour old (#{time_diff} seconds)"]]
+        [500, { 'Content-Type' => 'text/plain' }, ["nugget results file is stale (#{time_diff} seconds), something is wrong"]]
       end
     end
 
