@@ -44,7 +44,12 @@ module Nugget
 
         Nugget::Log.info("Test #{test} complete with status #{result}")
 
-        results.store(test, {:config => definition, :result => result, :response => response})
+        results.store(test, {
+          :config => definition,
+          :result => result,
+          :response => response,
+          :timestamp => Time.now.to_i
+        })
 
         if Nugget::Config.backstop_url
           Nugget::Backstop.send_metrics(test, result, response)
