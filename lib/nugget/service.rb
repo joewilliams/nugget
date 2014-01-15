@@ -8,7 +8,7 @@ module Nugget
         run()
 
         # chill
-        sleep(Nugget::Config.interval)
+        sleep(Nugget::Config.interval.to_i)
       end
     end
 
