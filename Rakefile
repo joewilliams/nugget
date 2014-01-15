@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 require './lib/nugget/version.rb'
 
 spec = Gem::Specification.new do |s|
@@ -10,7 +10,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = "http://github.com/joewilliams/nugget"
   s.platform = Gem::Platform::RUBY
   s.summary = "a http and tcp testing service"
-  s.files = FileList["{bin, lib}/**/*"].to_a
+  s.files = FileList["{bin,lib}/**/*"].to_a
   s.require_path = "lib"
   s.bindir = "bin"
   s.executables = %w( nugget )
@@ -19,6 +19,6 @@ spec = Gem::Specification.new do |s|
   %w{mixlib-config mixlib-log mixlib-cli turd yajl-ruby thin}.each { |gem| s.add_dependency gem }
 end
 
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_tar = true
 end
