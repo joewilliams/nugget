@@ -31,12 +31,18 @@ module  Nugget
 
       Nugget::Log.level(Nugget::Config.log_level)
 
-      if Nugget::Config.daemon
-        Nugget::Service.run_daemon()
-      elsif Nugget::Config.web
+      if Nugget::Config.web
         Nugget::Web.run()
       else
-        Nugget::Service.run_once()
+        if Nugget::Config.config
+          if  Nugget::Config.daemon
+            Nugget::Service.run_daemon()
+          else
+            Nugget::Service.run_once()
+          end
+        else
+          Nugget::Log.error("No config supplied! Use \"-c FILE\".")
+        end
       end
     end
 
