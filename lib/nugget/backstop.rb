@@ -29,16 +29,16 @@ module Nugget
       Nugget::Log.debug("Sending the following to backstop: #{metric}: #{value}")
 
       body = [{
-        metric: metric,
-        value: value,
-        measure_time: Time.now.to_i
+        :metric => metric,
+        :value => value,
+        :measure_time => Time.now.to_i
       }].to_json
 
       request = Typhoeus::Request.new(
         Nugget::Config.backstop_url,
-        method: :post,
-        body: body,
-        headers: { 'Content-Type' => 'application/json' }
+        :method => :post,
+        :body => body,
+        :headers => { 'Content-Type' => 'application/json' }
       )
 
       response = request.run
