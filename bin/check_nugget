@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'yajl/json_gem'
+require 'pp'
+
+RESULTS_FILE = "/tmp/nugget_results.json"
+
+results_file = File.new(RESULTS_FILE, 'r')
+parser = Yajl::Parser.new(:symbolize_keys => true)
+results = parser.parse(results_file)
+
+if ARGV[0] == "--debug"
+  PP.pp results
+end
+
+failed_tests = []
+
+results.each do |test, info|
+  if info[:result] == "FAIL"
+    failed_tests << test.to_s
+  end
+end
+
+if failed_tests.length > 0
+  puts "CRITICAL - failed nugget tests: #{failed_tests}"
+  exit 2
+else
+  puts "OK - nugget tests are passing"
+  exit 0
+end
