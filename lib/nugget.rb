@@ -6,6 +6,7 @@ require 'mixlib/config'
 require 'mixlib/log'
 require 'yajl/json_gem'
 require 'thin'
+require 'open-uri'
 
 __DIR__ = File.dirname(__FILE__)
 

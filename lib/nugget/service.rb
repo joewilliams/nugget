@@ -18,7 +18,7 @@ module Nugget
     end
 
     def self.run()
-      config_file = File.new(Nugget::Config.config, 'r')
+      config_file = open(Nugget::Config.config)
       parser = Yajl::Parser.new(:symbolize_keys => true)
       config = parser.parse(config_file)
 
