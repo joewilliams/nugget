@@ -21,6 +21,7 @@ module Nugget
       config_file = open(Nugget::Config.config)
       parser = Yajl::Parser.new(:symbolize_keys => true)
       config = parser.parse(config_file)
+      ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
 
       results = Hash.new
 
