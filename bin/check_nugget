@@ -5,7 +5,7 @@ require 'yajl/json_gem'
 require 'pp'
 require 'iconv'
 
-RESULTS_FILE = "/tmp/nugget_results.json"
+RESULTS_FILE = "./nugget.results"
 
 ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
 
@@ -18,16 +18,17 @@ if ARGV[0] == "--debug"
   PP.pp results
 end
 
-failed_tests = []
+failed_tests = {}
 
 results.each do |test, info|
   if info[:result] == "FAIL"
-    failed_tests << test.to_s
+    failed_tests.store(test.to_s, info[:response][:failed])
   end
 end
 
 if failed_tests.length > 0
-  puts "CRITICAL - failed nugget tests: #{failed_tests}"
+  output = failed_tests.map {|k, v| "#{k}[#{v}]"}.join(',')
+  puts "CRITICAL - failed nugget tests: #{output}"
   exit 2
 else
   puts "OK - nugget tests are passing"
