@@ -36,7 +36,7 @@ module Nugget
           response = Turd.run(request_definition, response_definition)
           result = "PASS"
         rescue Exception => e
-          Nugget::Log.error("#{definition[:type]} test #{test} failed!")
+          Nugget::Log.error("#{definition[:type]} test #{test} failed due to #{e.response[:failed]}!")
           Nugget::Log.error(e)
 
           result = "FAIL"
