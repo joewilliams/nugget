@@ -46,7 +46,7 @@ module Nugget
         Nugget::Log.info("Test #{test} complete with status #{result}")
 
         results.store(test, {
-          :config => definition,
+          :config => request_definition,
           :result => result,
           :response => response,
           :timestamp => Time.now.to_i
