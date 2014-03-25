@@ -3,14 +3,17 @@
 require 'rubygems'
 require 'yajl/json_gem'
 require 'pp'
-require 'iconv'
+require 'iconv' if RUBY_VERSION =~ /1.8/
 
 RESULTS_FILE = "/tmp/nugget_results.json"
 
-ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-
 results_file = File.read(RESULTS_FILE)
-clean_results = ic.iconv(results_file)
+if RUBY_VERSION =~ /1.8/
+	ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+	clean_results = ic.iconv(results_file)
+else
+	clean_results = results_file.chars.select{|i| i.valid_encoding?}.join
+end
 parser = Yajl::Parser.new(:symbolize_keys => true)
 results = parser.parse(clean_results)
 

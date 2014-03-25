@@ -7,7 +7,7 @@ require 'mixlib/log'
 require 'yajl/json_gem'
 require 'thin'
 require 'open-uri'
-require 'iconv'
+require 'iconv' if RUBY_VERSION =~ /1.8/
 
 __DIR__ = File.dirname(__FILE__)
 
