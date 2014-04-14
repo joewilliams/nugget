@@ -37,10 +37,10 @@ module  Nugget
         Nugget::Web.run()
       else
         if Nugget::Config.config
-          if  Nugget::Config.daemon
-            Nugget::Service.run_daemon()
+          if Nugget::Config.daemon
+            Nugget::Service.run_daemon(Nugget::Config.test)
           else
-            Nugget::Service.run_once()
+            Nugget::Service.run_once(Nugget::Config.test)
           end
         else
           Nugget::Log.error("No config supplied! Use \"-c FILE\".")

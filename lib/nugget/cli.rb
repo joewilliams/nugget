@@ -20,6 +20,11 @@ module Nugget
       :long => "--config PATH",
       :description => "Path of the json config."
 
+    option :test,
+      :short => "-t TEST_NAME",
+      :long => "--test TEST_NAME",
+      :description => "Individual test name to run."
+
     option :daemon,
       :short => "-d",
       :long => "--daemon",
