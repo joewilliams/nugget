@@ -1,5 +1,8 @@
 require 'rubygems'
 
+require 'bundler'
+require 'bundler/setup'
+
 require 'turd'
 require 'mixlib/cli'
 require 'mixlib/config'
