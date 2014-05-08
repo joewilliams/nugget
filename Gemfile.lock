@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nugget (0.0.4)
+    nugget (0.0.10)
       mixlib-cli
       mixlib-config
       mixlib-log
@@ -28,7 +28,7 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
-    turd (0.0.3)
+    turd (0.0.5)
       typhoeus
     typhoeus (0.6.7)
       ethon (~> 0.6.2)
