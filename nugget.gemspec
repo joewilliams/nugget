@@ -18,6 +18,6 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc = true
   s.extra_rdoc_files = ["README.md"]
   %w{mixlib-config mixlib-log mixlib-cli turd yajl-ruby thin}.each { |gem| s.add_dependency gem }
-  s.add_development_dependency "bundler", "~> 1.5"
+  s.add_development_dependency "bundler", "~> 1.2"
   s.add_development_dependency "rake"
 end
