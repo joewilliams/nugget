@@ -5,7 +5,7 @@ require 'yajl/json_gem'
 require 'pp'
 require 'iconv' if RUBY_VERSION =~ /1.8/
 
-RESULTS_FILE = "./tmp/nugget_results.json"
+RESULTS_FILE = "/tmp/nugget_results.json"
 
 results_file = File.read(RESULTS_FILE)
 if RUBY_VERSION =~ /1.8/
