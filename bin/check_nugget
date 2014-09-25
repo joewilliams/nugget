@@ -5,7 +5,7 @@ require 'yajl/json_gem'
 require 'pp'
 require 'iconv' if RUBY_VERSION =~ /1.8/
 
-RESULTS_FILE = "/tmp/nugget_results.json"
+RESULTS_FILE = "./tmp/nugget_results.json"
 
 results_file = File.read(RESULTS_FILE)
 if RUBY_VERSION =~ /1.8/
@@ -23,9 +23,25 @@ end
 
 failed_tests = {}
 
-results.each do |test, info|
-  if info[:result] == "FAIL"
-    failed_tests.store(test.to_s, info[:response][:failed])
+if ARGV[0] == "-s"
+  if ARGV[1]
+    if results[ARGV[1].to_sym]
+      if results[ARGV[1].to_sym][:result] == "FAIL"
+        failed_tests.store(ARGV[1], results[ARGV[1].to_sym][:response][:failed])
+      end
+    else
+      puts "no check by that name"
+      exit 1
+    end
+  else
+    puts "-s requires an argument in the form of a check name"
+    exit 1
+  end
+else
+  results.each do |test, info|
+    if info[:result] == "FAIL"
+      failed_tests.store(test.to_s, info[:response][:failed])
+    end
   end
 end
 
