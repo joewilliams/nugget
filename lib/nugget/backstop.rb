@@ -10,6 +10,8 @@ module Nugget
 
       if result == "FAIL"
         backstop_requst("#{name}.result", 1)
+      else
+        backstop_requst("#{name}.result", 0)
       end
 
     end
