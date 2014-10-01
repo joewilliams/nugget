@@ -23,6 +23,7 @@ module Nugget
       config = parser.parse(config_file)
 
       results = Hash.new
+      threadlist = Array.new
 
       if test_name
         if definition = config[test_name.to_s.to_sym]
@@ -32,9 +33,13 @@ module Nugget
         end
       else
         config.each do |test, definition|
-          run_test(results, test, definition)
+          threadlist << Thread.new { run_test(results, test, definition) }
         end
       end
+
+      threadlist.each { |x|
+          x.join
+      }
 
       if Nugget::Config.daemon
         Nugget::Service.write_results(results)
