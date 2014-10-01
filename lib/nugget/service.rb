@@ -44,6 +44,8 @@ module Nugget
       if Nugget::Config.daemon
         Nugget::Service.write_results(results)
       end
+
+      send_metrics(results)
     end
 
     def self.run_test(results, test, definition)
@@ -72,10 +74,6 @@ module Nugget
         :response => response,
         :timestamp => Time.now.to_i
       })
-
-      if Nugget::Config.backstop_url
-        Nugget::Backstop.send_metrics(test, result, response)
-      end
     end
 
     def self.config_converter(definition)
@@ -106,6 +104,14 @@ module Nugget
       rescue Exception => e
         Nugget::Log.error("Something went wrong with writing out the results file!")
         Nugget::Log.error(e)
+      end
+    end
+
+    def self.send_metrics(results)
+      results.each do |test, data|
+        if Nugget::Config.backstop_url
+          Nugget::Backstop.send_metrics(test, data[:result], data[:response])
+        end
       end
     end
 
