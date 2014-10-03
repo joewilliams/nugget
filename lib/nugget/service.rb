@@ -124,7 +124,7 @@ module Nugget
       end
 
       if Nugget::Config.statsd_host
-        Nugget::Statsd.send_metrics(test, result, response)
+        Nugget::NStatsd.send_metrics(test, result, response)
       end
     end
 

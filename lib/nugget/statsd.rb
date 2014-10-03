@@ -1,5 +1,5 @@
 module Nugget
-  class Statsd
+  class NStatsd # NStatsd since Statsd collides
 
     def self.stats
       @stats ||= Statsd.new(Nugget::Config.statsd_host, Nugget::Config.statsd_port, Nugget::Config.statsd_key).tap do |statsd|
@@ -8,7 +8,7 @@ module Nugget
     end
 
     def self.send_metrics(name, result, response)
-      stats = Nugget::Statsd.stats
+      statsd = Nugget::NStatsd.stats
       send_test_result(statsd, name, result)
       send_test_timings(statsd, name, response)
     end
