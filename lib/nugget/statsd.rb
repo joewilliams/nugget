@@ -27,7 +27,7 @@ module Nugget
 
       response.each do |key, value|
         if key.to_s.include?("_time")
-          stats.timing("#{name}.#{key}", value)
+          statsd.timing("#{name}.#{key}", value)
         end
       end
 
