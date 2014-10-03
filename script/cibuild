@@ -5,3 +5,7 @@ if [ -d /usr/share/rbenv/shims ]; then
 fi
 
 echo "Using $(rbenv version)"
+
+bundle install --path vendor/gems --binstubs
+
+bundle exec rake
