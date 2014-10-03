@@ -16,9 +16,9 @@ module Nugget
     def self.send_test_result(statsd, name, result)
 
       if result == "FAIL"
-        statsd.gauge("#{name}.result_count", 1)
+        statsd.gauge("#{name}.failures.count", 1)
       else
-        statsd.gauge("#{name}.result_count", 0)
+        statsd.gauge("#{name}.failures.count", 0)
       end
 
     end
