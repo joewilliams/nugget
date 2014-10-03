@@ -9,6 +9,7 @@ require 'mixlib/config'
 require 'mixlib/log'
 require 'yajl/json_gem'
 require 'thin'
+require 'statsd'
 require 'open-uri'
 require 'iconv' if RUBY_VERSION =~ /1.8/
 
@@ -24,6 +25,7 @@ require 'nugget/cli'
 require 'nugget/service'
 require 'nugget/web'
 require 'nugget/backstop'
+require 'nugget/statsd'
 require 'nugget/version'
 
 module  Nugget
