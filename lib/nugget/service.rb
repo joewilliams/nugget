@@ -84,9 +84,7 @@ module Nugget
         :timestamp => Time.now.to_i
       })
 
-      if Nugget::Config.backstop_url
-        Nugget::Backstop.send_metrics(test, result, response)
-      end
+      send_metrics(test, result, response)
     end
 
     def self.config_converter(definition)
@@ -117,6 +115,16 @@ module Nugget
       rescue Exception => e
         Nugget::Log.error("Something went wrong with writing out the results file!")
         Nugget::Log.error(e)
+      end
+    end
+
+    def self.send_metrics(test, result, response)
+      if Nugget::Config.backstop_url
+        Nugget::Backstop.send_metrics(test, result, response)
+      end
+
+      if Nugget::Config.statsd_host
+        Nugget::Statsd.send_metrics(test, result, response)
       end
     end
 

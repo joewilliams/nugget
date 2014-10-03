@@ -55,6 +55,26 @@ module Nugget
       :long => "--backstop URL",
       :description => "URL for backstop metrics thing."
 
+    option :statsd_namespace,
+      :short => "-s NAMESPACE",
+      :long => "--statsdnamespace NAMESPACe",
+      :description => "statsd namespace."
+
+    option :statsd_host,
+      :short => "-h HOST",
+      :long => "--statsdhost HOST",
+      :description => "statsd host."
+
+    option :statsd_port,
+      :short => "-a PORT",
+      :long => "--statsdport PORT",
+      :description => "statsd port."
+
+    option :statsd_key,
+      :short => "-k URL",
+      :long => "--statsdkey KEY",
+      :description => "statsd key."
+
     option :resultsfile,
       :short => "-r FILE",
       :long => "--results FILE",

@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/github/statsd-ruby.git
+  revision: 043e83df7b812d42806891049b72f20212f18463
+  specs:
+    statsd-ruby (0.3.0.github.2)
+
 PATH
   remote: .
   specs:
@@ -41,3 +47,4 @@ DEPENDENCIES
   bundler (~> 1.5)
   nugget!
   rake
+  statsd-ruby!
