@@ -1,0 +1,11 @@
+if [ -d /usr/share/rbenv/shims ]; then
+  export PATH=/usr/share/rbenv/shims:$PATH
+  export RBENV_VERSION=2.1.1-github
+  export RUBY_VERSION=2.1.1-github
+fi
+
+echo "Using $(rbenv version)"
+
+bundle install --path vendor/gems --binstubs
+
+bundle exec rake
