@@ -24,7 +24,7 @@ require 'nugget/web'
 require 'nugget/backstop'
 require 'nugget/version'
 
-TIMEOUT = 30
+TIMEOUT = 60
 
 module  Nugget
   class << self
