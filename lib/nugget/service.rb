@@ -5,9 +5,11 @@ module Nugget
       Nugget::Log.info("Starting up Nugget in daemon mode ...")
 
       loop do
+        Nugget::Log.debug("Running tests ...")
         run(test_name)
 
         # chill
+        Nugget::Log.debug("Sleeping for #{Nugget::Config.interval.to_i} ...")
         sleep(Nugget::Config.interval.to_i)
       end
     end
@@ -54,8 +56,17 @@ module Nugget
         request_definition = config_converter(definition)
         response_definition = definition[:response]
 
-        response = Turd.run(request_definition, response_definition)
+        status = Timeout::timeout(TIMEOUT) {
+          Nugget::Log.debug("Asserting turd definitions ...")
+          response = Turd.run(request_definition, response_definition)
+        }
         result = "PASS"
+      rescue Timeout::Error => e
+        Nugget::Log.error("#{definition[:type]} test #{test} took too long to run (#{TIMEOUT}s)!")
+        Nugget::Log.error(e)
+
+        result = "FAIL"
+        response = "timeout"
       rescue Exception => e
         Nugget::Log.error("#{definition[:type]} test #{test} failed due to #{e.response[:failed]}!")
         Nugget::Log.error(e)

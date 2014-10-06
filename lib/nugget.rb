@@ -8,6 +8,7 @@ require 'yajl/json_gem'
 require 'thin'
 require 'open-uri'
 require 'iconv' if RUBY_VERSION =~ /1.8/
+require 'timeout'
 
 __DIR__ = File.dirname(__FILE__)
 
@@ -22,6 +23,8 @@ require 'nugget/service'
 require 'nugget/web'
 require 'nugget/backstop'
 require 'nugget/version'
+
+TIMEOUT = 30
 
 module  Nugget
   class << self
