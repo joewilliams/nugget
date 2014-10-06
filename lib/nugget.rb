@@ -12,6 +12,7 @@ require 'thin'
 require 'statsd'
 require 'open-uri'
 require 'iconv' if RUBY_VERSION =~ /1.8/
+require 'timeout'
 
 __DIR__ = File.dirname(__FILE__)
 
@@ -27,6 +28,8 @@ require 'nugget/web'
 require 'nugget/backstop'
 require 'nugget/statsd'
 require 'nugget/version'
+
+TIMEOUT = 30
 
 module  Nugget
   class << self
