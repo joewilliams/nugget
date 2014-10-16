@@ -17,8 +17,10 @@ module Nugget
 
       if result == "FAIL"
         statsd.gauge("#{name}.failures.count", 1)
+        Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 1")
       else
         statsd.gauge("#{name}.failures.count", 0)
+        Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 0")
       end
 
     end
@@ -27,6 +29,7 @@ module Nugget
 
       response.each do |key, value|
         if key.to_s.include?("_time")
+          Nugget::Log.debug("Sending the following to statsd: #{key}: #{value}")
           statsd.timing("#{name}.#{key}", value)
         end
       end
