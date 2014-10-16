@@ -70,11 +70,6 @@ module Nugget
       :long => "--statsdport PORT",
       :description => "statsd port."
 
-    option :statsd_key,
-      :short => "-k URL",
-      :long => "--statsdkey KEY",
-      :description => "statsd key."
-
     option :resultsfile,
       :short => "-r FILE",
       :long => "--results FILE",
