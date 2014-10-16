@@ -18,7 +18,7 @@ Nugget also includes a very basic web service daemon that simply reads the curre
 
         $ nugget -w
 
-Additionally, nugget includes support for sending results of the tests to [backstop](https://github.com/obfuscurity/backstop).
+Additionally, nugget includes support for sending results of the tests to [backstop](https://github.com/obfuscurity/backstop) and [statsd](https://github.com/reinh/statsd).
 
 ![](https://dl.dropboxusercontent.com/s/1xhl7fnuw0y0934/2014-01-13%20at%207.47%20PM.png)
 
