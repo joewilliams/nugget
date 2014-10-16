@@ -29,7 +29,7 @@ require 'nugget/backstop'
 require 'nugget/statsd'
 require 'nugget/version'
 
-TIMEOUT = 60
+TIMEOUT = 180
 
 module  Nugget
   class << self
