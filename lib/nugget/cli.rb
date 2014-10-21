@@ -57,7 +57,7 @@ module Nugget
 
     option :statsd_namespace,
       :short => "-s NAMESPACE",
-      :long => "--statsdnamespace NAMESPACe",
+      :long => "--statsdnamespace NAMESPACE",
       :description => "statsd namespace."
 
     option :statsd_host,
@@ -78,7 +78,7 @@ module Nugget
     option :resultsfile,
       :short => "-r FILE",
       :long => "--results FILE",
-      :default => "/tmp/nugget_results.json",
+      :default => false,
       :description => "Path to where results file is written/read."
 
     option :help,

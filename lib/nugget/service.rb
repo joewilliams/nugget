@@ -43,9 +43,7 @@ module Nugget
           x.join
       }
 
-      if Nugget::Config.daemon
-        Nugget::Service.write_results(results)
-      end
+      Nugget::Service.write_results(results)
     end
 
     def self.run_test(results, test, definition)
@@ -109,9 +107,12 @@ module Nugget
 
     def self.write_results(results)
       begin
-        file = File.open(Nugget::Config.resultsfile, "w")
-        file.puts(results.to_json)
-        file.close
+        if Nugget::Config.resultsfile
+          Nugget::Log.debug("Writing results to #{Nugget::Config.resultsfile} ...")
+          file = File.open(Nugget::Config.resultsfile, "w")
+          file.puts(results.to_json)
+          file.close
+        end
       rescue Exception => e
         Nugget::Log.error("Something went wrong with writing out the results file!")
         Nugget::Log.error(e)
