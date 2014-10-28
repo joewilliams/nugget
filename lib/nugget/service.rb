@@ -55,7 +55,7 @@ module Nugget
         response_definition = definition[:response]
 
         status = Timeout::timeout(TIMEOUT) {
-          Nugget::Log.debug("Asserting turd definitions ...")
+          Nugget::Log.debug("Asserting turd definitions for #{test}...")
           response = Turd.run(request_definition, response_definition)
         }
         result = "PASS"
@@ -67,6 +67,7 @@ module Nugget
         response = "timeout"
       rescue Exception => e
         Nugget::Log.error("#{definition[:type]} test #{test} failed due to #{e.response[:failed]}!")
+        Nugget::Log.error("return code: #{e.response[:return_code]}")
         Nugget::Log.error(e)
 
         result = "FAIL"
