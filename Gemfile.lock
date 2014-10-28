@@ -1,9 +1,3 @@
-GIT
-  remote: https://github.com/github/statsd-ruby.git
-  revision: 043e83df7b812d42806891049b72f20212f18463
-  specs:
-    statsd-ruby (0.3.0.github.2)
-
 PATH
   remote: .
   specs:
@@ -11,6 +5,7 @@ PATH
       mixlib-cli
       mixlib-config
       mixlib-log
+      statsd-ruby
       thin
       turd
       yajl-ruby
@@ -19,32 +14,30 @@ GEM
   remote: https://rubygems.org/
   specs:
     daemons (1.1.9)
-    ethon (0.6.2)
+    ethon (0.7.1)
       ffi (>= 1.3.0)
-      mime-types (~> 1.18)
     eventmachine (1.0.3)
-    ffi (1.9.3)
-    mime-types (1.25.1)
-    mixlib-cli (1.4.0)
+    ffi (1.9.6)
+    mixlib-cli (1.5.0)
     mixlib-config (2.1.0)
     mixlib-log (1.6.0)
     rack (1.5.2)
-    rake (10.1.1)
-    thin (1.6.1)
-      daemons (>= 1.0.9)
-      eventmachine (>= 1.0.0)
-      rack (>= 1.0.0)
-    turd (0.0.5)
+    rake (10.3.2)
+    statsd-ruby (1.2.1)
+    thin (1.6.3)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0)
+      rack (~> 1.0)
+    turd (0.0.6)
       typhoeus
-    typhoeus (0.6.7)
-      ethon (~> 0.6.2)
-    yajl-ruby (1.2.0)
+    typhoeus (0.6.9)
+      ethon (>= 0.7.1)
+    yajl-ruby (1.2.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.2)
+  bundler (~> 1.5)
   nugget!
   rake
-  statsd-ruby!
