@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/github/statsd-ruby.git
+  revision: 4be5ca32eb8c55b04a440b8f6a74d0f421a2154e
+  specs:
+    statsd-ruby (0.3.0.github.3)
+
 PATH
   remote: .
   specs:
@@ -5,7 +11,6 @@ PATH
       mixlib-cli
       mixlib-config
       mixlib-log
-      statsd-ruby
       thin
       turd
       yajl-ruby
@@ -23,7 +28,6 @@ GEM
     mixlib-log (1.6.0)
     rack (1.5.2)
     rake (10.3.2)
-    statsd-ruby (1.2.1)
     thin (1.6.3)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0)
@@ -38,6 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.5)
+  bundler (~> 1.2)
   nugget!
   rake
+  statsd-ruby!
