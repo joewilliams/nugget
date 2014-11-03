@@ -61,6 +61,7 @@ module Nugget
         result = "PASS"
       rescue Timeout::Error => e
         Nugget::Log.error("#{definition[:type]} test #{test} took too long to run (#{TIMEOUT}s)!")
+        Nugget::Log.error("url: #{request_definition[:url]}")
         Nugget::Log.error(e)
 
         result = "FAIL"
@@ -68,6 +69,7 @@ module Nugget
       rescue Exception => e
         Nugget::Log.error("#{definition[:type]} test #{test} failed due to #{e.response[:failed]}!")
         Nugget::Log.error("return code: #{e.response[:return_code]}")
+        Nugget::Log.error("url: #{request_definition[:url]}")
         Nugget::Log.error(e)
 
         result = "FAIL"
