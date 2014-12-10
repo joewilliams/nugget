@@ -8,4 +8,4 @@ set -e
   . .app-config/production.sh
 
 export PATH=/usr/share/rbenv/shims:$PATH
-bundle install --local
+bundle install --local --path vendor/gems
