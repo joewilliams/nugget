@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/github/statsd-ruby.git
-  revision: 509901a8f596c2434c7e271955af3111412ce9ac
+  revision: 4be5ca32eb8c55b04a440b8f6a74d0f421a2154e
   specs:
     statsd-ruby (0.3.0.github.3)
 
