@@ -26,11 +26,16 @@ module Nugget
     end
 
     def self.send_test_timings(statsd, name, response)
-
-      response.each do |key, value|
-        if key.to_s.include?("_time")
-          Nugget::Log.debug("Sending the following to statsd: #{key}: #{value}")
-          statsd.timing("#{name}.#{key}", value)
+      
+      if response == "timeout"
+	Nugget::Log.debug("Sending the following to statsd: timeout: #{TIMEOUT}")
+        statsd.timing("#{name}.timeout", TIMEOUT)
+      else
+        response.each do |key, value|
+          if key.to_s.include?("_time")
+            Nugget::Log.debug("Sending the following to statsd: #{key}: #{value}")
+            statsd.timing("#{name}.#{key}", value)
+          end
         end
       end
 
