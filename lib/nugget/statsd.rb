@@ -2,7 +2,8 @@ module Nugget
   class NStatsd # NStatsd since Statsd collides
 
     def self.stats
-      @stats ||= Statsd.new(Nugget::Config.statsd_host, Nugget::Config.statsd_port, Nugget::Config.statsd_key).tap do |statsd|
+      ip = Addrinfo.ip(Nugget::Config.statsd_host)
+      @stats ||= Statsd.new(ip, Nugget::Config.statsd_port, Nugget::Config.statsd_key).tap do |statsd|
         statsd.namespace =  Nugget::Config.statsd_namespace
       end
     end
