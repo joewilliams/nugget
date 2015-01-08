@@ -61,6 +61,8 @@ module Nugget
         result = "PASS"
       rescue SystemCallError => e
         Nugget::Log.error(e)
+      rescue SocketError => e
+        Nugget::Log.error(e)
       rescue Timeout::Error => e
         Nugget::Log.error("#{definition[:type]} test #{test} took too long to run (#{TIMEOUT}s)!")
         Nugget::Log.error("url: #{request_definition[:url]}")
