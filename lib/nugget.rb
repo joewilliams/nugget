@@ -13,6 +13,7 @@ require 'statsd'
 require 'open-uri'
 require 'iconv' if RUBY_VERSION =~ /1.8/
 require 'timeout'
+require 'failbot'
 
 __DIR__ = File.dirname(__FILE__)
 
@@ -35,6 +36,8 @@ module  Nugget
   class << self
 
     def main
+      Failbot.setup ENV
+
       cli = Nugget::CLI.new
       cli.parse_options
       Nugget::Config.merge!(cli.config)
