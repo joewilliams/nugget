@@ -36,7 +36,7 @@ module  Nugget
   class << self
 
     def main
-      Failbot.setup ENV
+      Failbot.setup ENV, :app => 'nugget'
 
       cli = Nugget::CLI.new
       cli.parse_options
