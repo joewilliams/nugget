@@ -13,7 +13,7 @@ require 'statsd'
 require 'open-uri'
 require 'iconv' if RUBY_VERSION =~ /1.8/
 require 'timeout'
-require 'failbot'
+require 'failbot/exit_hook'
 
 __DIR__ = File.dirname(__FILE__)
 
