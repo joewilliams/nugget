@@ -37,7 +37,7 @@ module  Nugget
 
     def main
       Thread.abort_on_exception = true # catch errors inside worker threads
-      Failbot.setup ENV, :app => 'nugget'
+      Failbot.setup ENV.to_hash, {:app => 'nugget'}
 
       cli = Nugget::CLI.new
       cli.parse_options
