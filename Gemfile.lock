@@ -21,7 +21,7 @@ GEM
     mixlib-cli (1.5.0)
     mixlib-config (2.1.0)
     mixlib-log (1.6.0)
-    rack (1.5.2)
+    rack (1.6.2)
     rake (10.3.2)
     statsd-ruby (1.2.1)
     thin (1.6.3)
