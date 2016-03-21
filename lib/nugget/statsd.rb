@@ -9,12 +9,13 @@ module Nugget
 
     def self.send_metrics(name, result, response)
       statsd = Nugget::NStatsd.stats
-      send_test_result(statsd, name, result)
-      send_test_timings(statsd, name, response)
+      send_test_result(statsd, name, result, response)
+      send_test_timings(statsd, name, result, response)
     end
 
-    def self.send_test_result(statsd, name, result)
+    private
 
+    def self.send_test_result(statsd, name, result, response)
       if result == "FAIL"
         statsd.gauge("#{name}.failures.count", 1)
         Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 1")
@@ -22,11 +23,10 @@ module Nugget
         statsd.gauge("#{name}.failures.count", 0)
         Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 0")
       end
-
     end
 
-    def self.send_test_timings(statsd, name, response)
-      if response      
+    def self.send_test_timings(statsd, name, result, response)
+      if response
         if response == "timeout"
 	  Nugget::Log.debug("Sending the following to statsd: timeout: #{TIMEOUT}")
           statsd.timing("#{name}.timeout", TIMEOUT)

@@ -6,6 +6,8 @@ module Nugget
       send_test_timings(name, response)
     end
 
+    private
+
     def self.send_test_result(name, result)
 
       if result == "FAIL"
