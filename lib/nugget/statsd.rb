@@ -21,13 +21,13 @@ module Nugget
       tcp_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_connect
       tls_failure = failure && response.is_a?(Hash) && response[:return_code] == :ssl_connect_error
 
-      gauge(statsd, "failures", failure)
-      gauge(statsd, "failures.dns", dns_failure)
-      gauge(statsd, "failures.tcp", tcp_failure)
-      gauge(statsd, "failures.tls", tls_failure)
+      gauge(statsd, name, "failures", failure)
+      gauge(statsd, name, "failures.dns", dns_failure)
+      gauge(statsd, name, "failures.tcp", tcp_failure)
+      gauge(statsd, name, "failures.tls", tls_failure)
     end
 
-    def self.gauge(statsd, stat, boolean)
+    def self.gauge(statsd, name, stat, boolean)
       count = boolean ? 1 : 0
       metric = "#{name}.#{stat}.count"
       statsd.gauge(metric, count)
