@@ -18,6 +18,10 @@ module Nugget
     def self.send_test_result(statsd, name, result, response)
       if result == "FAIL"
         gauge("failures", 1)
+
+        if response.is_a?(Hash) && response[:couldnt_resolve_host] == 'couldnt_resolve_host'
+          gauge("failures.dns", 1)
+        end
       else
         gauge("failures", 0)
       end
