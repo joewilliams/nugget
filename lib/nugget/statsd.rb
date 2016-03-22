@@ -28,8 +28,9 @@ module Nugget
     end
 
     def self.gauge(statsd, stat, boolean)
+      count = boolean ? 1 : 0
       metric = "#{name}.#{stat}.count"
-      statsd.gauge(metric, boolean ? 1 : 0)
+      statsd.gauge(metric, count)
       Nugget::Log.debug("Sending the following to statsd: #{metric}: #{count}")
     end
 
