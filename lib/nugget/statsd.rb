@@ -27,9 +27,9 @@ module Nugget
       gauge(statsd, "failures.tls", tls_failure)
     end
 
-    def self.gauge(statsd, stat, count)
+    def self.gauge(statsd, stat, boolean)
       metric = "#{name}.#{stat}.count"
-      statsd.gauge(metric, count)
+      statsd.gauge(metric, boolean ? 1 : 0)
       Nugget::Log.debug("Sending the following to statsd: #{metric}: #{count}")
     end
 
