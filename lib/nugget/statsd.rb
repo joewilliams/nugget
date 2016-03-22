@@ -17,12 +17,14 @@ module Nugget
 
     def self.send_test_result(statsd, name, result, response)
       failure = (result == "FAIL")
-      dns_failure = failure && response.is_a?(Typhoeus::Response) && response.return_code == :couldnt_resolve_host
-      tcp_failure = failure && response.is_a?(Typhoeus::Response) && response.return_code == :couldnt_connect
+      dns_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_resolve_host
+      tcp_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_connect
+      tls_failure = failure && response.is_a?(Hash) && response[:return_code] == :ssl_connect_error
 
       gauge("failures", failure)
       gauge("failures.dns", dns_failure)
       gauge("failures.tcp", tcp_failure)
+      gauge("failures.tls", tls_failure)
     end
 
     def self.gauge(stat, count)
