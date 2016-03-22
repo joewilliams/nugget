@@ -17,12 +17,16 @@ module Nugget
 
     def self.send_test_result(statsd, name, result, response)
       if result == "FAIL"
-        statsd.gauge("#{name}.failures.count", 1)
-        Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 1")
+        gauge("failures", 1)
       else
-        statsd.gauge("#{name}.failures.count", 0)
-        Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 0")
+        gauge("failures", 0)
       end
+    end
+
+    def self.gauge(stat, count)
+      metric = "#{name}.#{stat}.count"
+      statsd.gauge(metric, count)
+      Nugget::Log.debug("Sending the following to statsd: #{metric}: #{count}")
     end
 
     def self.send_test_timings(statsd, name, result, response)
