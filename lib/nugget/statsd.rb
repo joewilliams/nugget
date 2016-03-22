@@ -16,15 +16,13 @@ module Nugget
     private
 
     def self.send_test_result(statsd, name, result, response)
-      if result == "FAIL"
-        gauge("failures", 1)
+      failure = (result == "FAIL")
+      dns_failure = failure && response.is_a?(Typhoeus::Response) && response.return_code == :couldnt_resolve_host
+      tcp_failure = failure && response.is_a?(Typhoeus::Response) && response.return_code == :couldnt_connect
 
-        if response.is_a?(Hash) && response[:couldnt_resolve_host] == 'couldnt_resolve_host'
-          gauge("failures.dns", 1)
-        end
-      else
-        gauge("failures", 0)
-      end
+      gauge("failures", failure)
+      gauge("failures.dns", dns_failure)
+      gauge("failures.tcp", tcp_failure)
     end
 
     def self.gauge(stat, count)
