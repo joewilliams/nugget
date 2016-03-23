@@ -21,11 +21,17 @@ module Nugget
       tcp_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_connect
       tls_failure = failure && response.is_a?(Hash) && response[:return_code] == :ssl_connect_error
 
+      # If we failed but for a non distinct protocol reason, it must be http
+      http_failure = failure && !(dns_failure || tcp_failure || tls_failure)
+
       gauge(statsd, name, "failures", failure)
       gauge(statsd, name, "failures.dns", dns_failure)
       gauge(statsd, name, "failures.tcp", tcp_failure)
       gauge(statsd, name, "failures.tls", tls_failure)
+      gauge(statsd, name, "failures.http", http_failure)
 
+      # A holistic timeout means we don't have accurate data around which
+      # protocol layer failed.
       timeout = (response == "timeout")
       gauge(statsd, name, "failures.timeout", timeout)
     end
