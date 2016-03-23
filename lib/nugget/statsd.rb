@@ -18,7 +18,7 @@ module Nugget
     def self.send_test_result(statsd, name, result, response)
       failure = (result == "FAIL")
       dns_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_resolve_host
-      tcp_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_connect
+      tcp_failure = failure && response.is_a?(Hash) && (response[:return_code] == :couldnt_connect || response[:return_code] == :operation_timedout)
       tls_failure = failure && response.is_a?(Hash) && response[:return_code] == :ssl_connect_error
 
       # If we failed but for a non distinct protocol reason, it must be http
