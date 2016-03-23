@@ -19,7 +19,7 @@ module Nugget
       failure = (result == "FAIL")
       dns_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_resolve_host
       tcp_failure = failure && response.is_a?(Hash) && (response[:return_code] == :couldnt_connect || response[:return_code] == :operation_timedout)
-      tls_failure = failure && response.is_a?(Hash) && response[:return_code] == :ssl_connect_error
+      tls_failure = failure && response.is_a?(Hash) && (response[:return_code] == :ssl_connect_error || response[:return_code] == :ssl_cacert)
 
       # If we failed but for a non distinct protocol reason, it must be http
       http_failure = failure && !(dns_failure || tcp_failure || tls_failure)
