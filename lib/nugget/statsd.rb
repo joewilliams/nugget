@@ -21,8 +21,10 @@ module Nugget
       tcp_failure = failure && response.is_a?(Hash) && [:couldnt_connect, :operation_timedout].include?(response[:return_code])
       tls_failure = failure && response.is_a?(Hash) && [:ssl_connect_error, :ssl_cacert].include?(response[:return_code])
 
-      # If we failed but for a non distinct protocol reason, it must be http
-      http_failure = failure && !(dns_failure || tcp_failure || tls_failure)
+      # If we failed but for a non distinct protocol reason, and the response
+      # includes the `response_code` key, it must be an http layer check which
+      # failed
+      http_failure = failure && response.is_a?(Hash) && response.key?(:response_code) && !(dns_failure || tcp_failure || tls_failure)
 
       gauge(statsd, name, "failures", failure)
       gauge(statsd, name, "failures.dns", dns_failure)
