@@ -25,6 +25,9 @@ module Nugget
       gauge(statsd, name, "failures.dns", dns_failure)
       gauge(statsd, name, "failures.tcp", tcp_failure)
       gauge(statsd, name, "failures.tls", tls_failure)
+
+      timeout = (response == "timeout")
+      gauge(statsd, name, "failures.timeout", timeout)
     end
 
     def self.gauge(statsd, name, stat, boolean)
