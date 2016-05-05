@@ -6,27 +6,47 @@ module Nugget
         statsd.namespace =  Nugget::Config.statsd_namespace
       end
     end
-
+    
     def self.send_metrics(name, result, response)
       statsd = Nugget::NStatsd.stats
-      send_test_result(statsd, name, result)
-      send_test_timings(statsd, name, response)
+      send_test_result(statsd, name, result, response)
+      send_test_timings(statsd, name, result, response)
     end
 
-    def self.send_test_result(statsd, name, result)
+    private
 
-      if result == "FAIL"
-        statsd.gauge("#{name}.failures.count", 1)
-        Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 1")
-      else
-        statsd.gauge("#{name}.failures.count", 0)
-        Nugget::Log.debug("Sending the following to statsd: #{name}_failure_count: 0")
-      end
+    def self.send_test_result(statsd, name, result, response)
+      failure = (result == "FAIL")
+      dns_failure = failure && response.is_a?(Hash) && response[:return_code] == :couldnt_resolve_host
+      tcp_failure = failure && response.is_a?(Hash) && [:couldnt_connect, :operation_timedout].include?(response[:return_code])
+      tls_failure = failure && response.is_a?(Hash) && [:ssl_connect_error, :ssl_cacert].include?(response[:return_code])
 
+      # If we failed but for a non distinct protocol reason, and the response
+      # includes the `response_code` key, it must be an http layer check which
+      # failed
+      http_failure = failure && response.is_a?(Hash) && response.key?(:response_code) && !(dns_failure || tcp_failure || tls_failure)
+
+      gauge(statsd, name, "failures", failure)
+      gauge(statsd, name, "failures.dns", dns_failure)
+      gauge(statsd, name, "failures.tcp", tcp_failure)
+      gauge(statsd, name, "failures.tls", tls_failure)
+      gauge(statsd, name, "failures.http", http_failure)
+
+      # A holistic timeout means we don't have accurate data around which
+      # protocol layer failed.
+      timeout = (response == "timeout")
+      gauge(statsd, name, "failures.timeout", timeout)
     end
 
-    def self.send_test_timings(statsd, name, response)
-      if response      
+    def self.gauge(statsd, name, stat, boolean)
+      count = boolean ? 1 : 0
+      metric = "#{name}.#{stat}.count"
+      statsd.gauge(metric, count)
+      Nugget::Log.debug("Sending the following to statsd: #{metric}: #{count}")
+    end
+
+    def self.send_test_timings(statsd, name, result, response)
+      if response
         if response == "timeout"
 	  Nugget::Log.debug("Sending the following to statsd: timeout: #{TIMEOUT}")
           statsd.timing("#{name}.timeout", TIMEOUT)
