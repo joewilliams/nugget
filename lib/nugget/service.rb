@@ -105,6 +105,12 @@ module Nugget
         options.delete(:url)
       end
 
+      if options[:headers]
+        options[:headers] = options[:headers].each_with_object({}) do |(key, value), result|
+          result[key.to_s] = value
+        end
+      end
+
       {
         :url => url,
         :type => definition[:type],
