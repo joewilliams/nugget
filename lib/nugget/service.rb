@@ -70,7 +70,7 @@ module Nugget
 
         result = "FAIL"
         response = "timeout"
-      rescue Exception => e
+      rescue Turd::AssertionFailure => e
         Nugget::Log.error("#{definition[:type]} test #{test} failed due to #{e.response[:failed]}!")
         Nugget::Log.error("return code: #{e.response[:return_code]}")
         Nugget::Log.error("url: #{request_definition[:url]}")
@@ -78,6 +78,11 @@ module Nugget
 
         result = "FAIL"
         response = e.response
+      rescue Exception => e
+        Nugget::Log.error(e)
+
+        result = "FAIL"
+        response = "unknown"
       end
 
       Nugget::Log.info("Test #{test} complete with status #{result}")
